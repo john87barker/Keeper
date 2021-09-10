@@ -31,7 +31,7 @@ namespace Keeper.Repositories
       }, splitOn: "id").ToList();
     }
 
-    private Keep GetById(int id)
+    internal Keep GetById(int id)
     {
       string sql = @"
       SELECT
@@ -47,6 +47,7 @@ namespace Keeper.Repositories
         return k;
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
+    
     internal Keep Create(Keep newKeep)
     {
       string sql = @"

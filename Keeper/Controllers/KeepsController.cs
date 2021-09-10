@@ -34,6 +34,20 @@ namespace Keeper.Controllers
       }
     }
 
+    [HttpGet("{id}")]
+    public ActionResult<Keep> GetById(int id)
+    {
+        try
+        {
+        Keep keep = _keepsService.GetById(id);
+        return Ok(keep);
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+    }
+
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Keep>> Create([FromBody] Keep newKeep)

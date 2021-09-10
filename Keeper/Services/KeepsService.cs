@@ -17,12 +17,17 @@ namespace Keeper.Services
     {
       return _repo.GetAll();
     }
+     internal Keep GetById(int id)
+    {
+      Keep found = _repo.GetById(id);
+      return found;
+    }
 
     internal Keep Create(Keep newKeep)
     {
       return _repo.Create(newKeep);
     }
 
-  
+   
   }
 }
