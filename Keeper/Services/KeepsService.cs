@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Keeper.Models;
 using Keeper.Repositories;
@@ -20,6 +21,10 @@ namespace Keeper.Services
      internal Keep GetById(int id)
     {
       Keep found = _repo.GetById(id);
+      if(found == null)
+      {
+        throw new Exception("Invalid Id");
+      }
       return found;
     }
 
@@ -40,6 +45,16 @@ namespace Keeper.Services
       original.Img = editedK.Img ?? original.Img;
       _repo.Edit(original);
       return original;
+    }
+
+    internal void Delete(int id, string userId)
+    {
+      Keep toDelete = GetById(id);
+      if(toDelete.CreatorId != userId)
+      {
+        throw new Exception("No deleting for you!");
+      }
+      _repo.Delete(id);
     }
   }
 }
