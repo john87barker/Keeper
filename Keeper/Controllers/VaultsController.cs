@@ -50,6 +50,23 @@ namespace Keeper.Controllers
       }
     }
 
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> Edit([FromBody] Vault editedV, int id)
+    {
+        try
+        {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        editedV.CreatorId = userInfo.Id;
+        editedV.Id = id;
+            Vault keep = _vaultsService.Edit(editedV);
+            return Ok(keep);
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+    }
 
 
   }

@@ -43,5 +43,20 @@ namespace Keeper.Repositories
         return v;
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
+
+    internal Vault Edit(Vault updatedData)
+    {
+      string sql = @"
+      UPDATE vaults
+      SET
+        name = @Name,
+        description = @Description,
+        img = @Img,
+        isPrivate = @IsPrivate
+      WHERE id = @id
+      ";
+      _db.Execute(sql, updatedData);
+      return updatedData;
+    }
   }
 }
