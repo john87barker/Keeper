@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keeper.Models;
@@ -17,6 +18,20 @@ namespace Keeper.Controllers
     public KeepsController(KeepsService keepsService)
     {
       _keepsService = keepsService;
+    }
+
+    [HttpGet]
+    public ActionResult<List<Keep>> GetAll()
+    {
+        try
+        {
+        List<Keep> keeps = _keepsService.GetAll();
+        return Ok(keeps);
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
     }
 
     [HttpPost]
