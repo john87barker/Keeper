@@ -47,7 +47,7 @@ namespace Keeper.Repositories
         return k;
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
-    
+
     internal Keep Create(Keep newKeep)
     {
       string sql = @"
@@ -62,6 +62,19 @@ namespace Keeper.Repositories
       //   return newKeep;
     }
 
+    internal Keep Edit(Keep updatedData)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+        name = @Name,
+        description = @Description,
+        img = @Img
+      WHERE id = @id
+      ";
+      _db.Execute(sql, updatedData);
+      return updatedData;
+    }
    
   }
 }
