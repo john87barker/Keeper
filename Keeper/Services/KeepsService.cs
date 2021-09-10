@@ -36,10 +36,10 @@ namespace Keeper.Services
     internal Keep Edit(Keep editedK)
     {
       Keep original = GetById(editedK.Id);
-    //   if( original.CreatorId != editedK.CreatorId)
-    //   {
-    //     throw new Exception("No touching that!");
-    //   }
+      if( original.CreatorId != editedK.CreatorId)
+      {
+        throw new Exception("No touching that!");
+      }
       original.Name = editedK.Name ?? original.Name;
       original.Description = editedK.Description ?? original.Description;
       original.Img = editedK.Img ?? original.Img;

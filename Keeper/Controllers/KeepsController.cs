@@ -72,7 +72,8 @@ namespace Keeper.Controllers
         try
         {
             Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-            editedK.Id = id;
+        editedK.CreatorId = userInfo.Id;
+        editedK.Id = id;
             Keep keep = _keepsService.Edit(editedK);
             return Ok(keep);
       }
