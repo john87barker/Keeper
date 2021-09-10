@@ -16,7 +16,7 @@ namespace Keeper.Services
     internal Vault GetById(int id)
     {
       Vault found = _repo.GetById(id);
-      if(found == null)
+      if (found == null)
       {
         throw new Exception("Invalid Id");
       }
@@ -30,7 +30,7 @@ namespace Keeper.Services
     internal Vault Edit(Vault editedV)
     {
       Vault original = GetById(editedV.Id);
-      if( original.CreatorId != editedV.CreatorId)
+      if (original.CreatorId != editedV.CreatorId)
       {
         throw new Exception("No touching that!");
       }
@@ -40,6 +40,16 @@ namespace Keeper.Services
       original.IsPrivate = editedV.IsPrivate != null ? editedV.IsPrivate : original.IsPrivate;
       _repo.Edit(original);
       return original;
+    }
+
+    internal void Delete(int id, string userId)
+    {
+      Vault toDelete = GetById(id);
+      if (toDelete.CreatorId != userId)
+      {
+        throw new Exception("No deleting for you!");
+      }
+      _repo.Delete(id);
     }
   }
 }

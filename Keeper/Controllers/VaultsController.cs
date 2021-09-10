@@ -68,6 +68,20 @@ namespace Keeper.Controllers
       }
     }
 
-
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<String>> Delete(int id)
+    {
+        try
+        {
+            Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+            _vaultsService.Delete(id, userInfo.Id);
+            return Ok("Death has been given to this keep.");
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+    }
   }
 }
