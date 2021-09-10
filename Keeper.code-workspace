@@ -1,0 +1,57 @@
+
+{
+  "folders": [
+    {
+      "path": "Keeper.client",
+      "name": "client"
+    },
+    {
+      "path": "Keeper",
+      "name": "server"
+    }
+  ],
+  "settings": {
+    "editor.suggestSelection": "first",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "files.exclude": {
+      "**/.nyc_*": true,
+      "**/coverage": true,
+      "**/node_modules": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#f69465",
+      "activityBar.activeBorder": "#e1fdea",
+      "activityBar.background": "#f69465",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#e1fdea",
+      "activityBarBadge.foreground": "#15202b",
+      "statusBar.background": "#f37335",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#e7550e",
+      "titleBar.activeBackground": "#f37335",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#f3733599",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#F37335"
+  }
+}
