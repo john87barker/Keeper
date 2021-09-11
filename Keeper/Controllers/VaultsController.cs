@@ -20,11 +20,13 @@ namespace Keeper.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Vault> GetById(int id)
+    public async Task<ActionResult<Vault>> GetByIdAsync(int id)
     {
         try
         {
-        Vault vault = _vaultsService.GetById(id);
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        // TODO Holli said that Mark said something about passing userinfo here to the service but I need to work on this later I think
+        Vault vault = _vaultsService.GetById(id, userInfo?.Id );
         return Ok(vault);
       }
         catch (Exception err)

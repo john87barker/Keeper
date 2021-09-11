@@ -13,14 +13,19 @@ namespace Keeper.Services
       _repo = repo;
     }
 
-    internal Vault GetById(int id)
+    internal Vault GetById(int id, string userId)
     {
-      Vault found = _repo.GetById(id);
-      if (found == null)
+      Vault vault = _repo.GetById(id);
+      if (vault == null )
       {
         throw new Exception("Invalid Id");
       }
-      return found;
+      if((userId != vault.CreatorId && vault.IsPrivate == true))
+      {
+        // is the owner this person
+        throw new Exception("Invalid Id");
+      }
+      return vault;
     }
     internal Vault Create(Vault newVault)
     {
@@ -29,12 +34,18 @@ namespace Keeper.Services
 
     internal Vault Edit(Vault editedV)
     {
-      Vault original = GetById(editedV.Id);
+      Vault original = _repo.GetById(editedV.Id);
+      if (original == null )
+      {
+        throw new Exception("Invalid Id");
+      }
       if (original.CreatorId != editedV.CreatorId)
       {
         throw new Exception("No touching that!");
       }
-      original.Name = editedV.Name ?? original.Name;
+      // original.Name = editedV.Name ?? original.Name;
+      original.Name = editedV.Name != null && editedV.Name.Length > 0 ? editedV.Name : original.Name;
+
       original.Description = editedV.Description ?? original.Description;
       original.Img = editedV.Img ?? original.Img;
       original.IsPrivate = editedV.IsPrivate != null ? editedV.IsPrivate : original.IsPrivate;
@@ -44,7 +55,7 @@ namespace Keeper.Services
 
     internal void Delete(int id, string userId)
     {
-      Vault toDelete = GetById(id);
+      Vault toDelete = GetById(id, userId);
       if (toDelete.CreatorId != userId)
       {
         throw new Exception("No deleting for you!");
