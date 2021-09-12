@@ -10,4 +10,5 @@ namespace Keeper.Models
         public bool? IsPrivate { get; set; }
         public Profile Creator { get; set; }
     }
+   
 }

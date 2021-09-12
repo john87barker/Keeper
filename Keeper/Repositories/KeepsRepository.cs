@@ -15,6 +15,26 @@ namespace Keeper.Repositories
       _db = db;
     }
 
+// TODO Passing all but one of the get vaultkeeps: Array contains keeps | AssertionError: Returned array does not contain newly created keep, Make Sure you can successfully Post Keeps: expected undefined to be an object
+// NOTE I can post keeps but it isn't taking a keep into the system I believe
+     internal List<VaultKeepViewModel> GetMyKeeps(int id)
+    {
+      string sql = @"
+      SELECT
+        a.*,
+        k.*,
+        vk.id AS vaultKeepsId
+        FROM vaultKeeps vk
+        JOIN keeps k ON vk.vaultId = k.id
+        JOIN accounts a ON a.id = k.creatorId
+        WHERE vk.vaultId = @id;
+      ";
+      return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
+      {
+        vk.Creator = p;
+        return vk;
+      }, new {id}, splitOn: "id").ToList();
+    }
      internal List<Keep> GetAll()
     {
       string sql = @"

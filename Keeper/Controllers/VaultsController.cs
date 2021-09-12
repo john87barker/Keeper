@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keeper.Models;
@@ -13,10 +14,12 @@ namespace Keeper.Controllers
     public class VaultsController : ControllerBase
     {
     private readonly VaultsService _vaultsService;
+    private readonly KeepsService _keepsService;
 
-    public VaultsController(VaultsService vaultsService)
+    public VaultsController(VaultsService vaultsService, KeepsService keepsService)
     {
       _vaultsService = vaultsService;
+      _keepsService = keepsService;
     }
 
     [HttpGet("{id}")]
@@ -25,7 +28,6 @@ namespace Keeper.Controllers
         try
         {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        // TODO Holli said that Mark said something about passing userinfo here to the service but I need to work on this later I think
         Vault vault = _vaultsService.GetById(id, userInfo?.Id );
         return Ok(vault);
       }
@@ -34,6 +36,23 @@ namespace Keeper.Controllers
         return BadRequest(err.Message);
       }
     }
+
+    [HttpGet("{id}/keeps")]
+    [Authorize]
+    public async Task<ActionResult<List<VaultKeepViewModel>>> GetKeeps(int id)
+    {
+      try
+      {
+          Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+          List<VaultKeepViewModel> keeps = _keepsService.GetMyKeeps(id);
+          return Ok(keeps);
+      }
+      catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+    }
+
 
     [HttpPost]
     [Authorize]

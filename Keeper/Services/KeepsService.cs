@@ -18,6 +18,10 @@ namespace Keeper.Services
     {
       return _repo.GetAll();
     }
+       internal List<VaultKeepViewModel> GetMyKeeps(int id)
+    {
+      return _repo.GetMyKeeps(id);
+    }
      internal Keep GetById(int id)
     {
       Keep found = _repo.GetById(id);
