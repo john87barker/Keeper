@@ -22,8 +22,13 @@ namespace Keeper.Services
       }
       return found;
     }
-    internal VaultKeep Create(VaultKeep newVK)
+    internal VaultKeep Create(VaultKeep newVK, string userId)
     {
+      // TODO the newVK.vaultId needs to match a vaultId on the users vaults... the following isn't right...
+      if(newVK.CreatorId != userId)
+      {
+        throw new Exception("you can't do that");
+      }
     return _vkrepo.Create(newVK);
     }
 

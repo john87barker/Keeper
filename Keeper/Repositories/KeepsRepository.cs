@@ -42,10 +42,13 @@ namespace Keeper.Repositories
       string sql = @"
       SELECT
         a.*,
-        k.*
-        
+        k.*,
+        vk.id AS vaultKeepId
+
       FROM keeps k
       JOIN accounts a ON a.id = k.creatorId
+      JOIN vaultKeeps vk ON vk.keepId = k.id;
+      
       
       ";
       return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
