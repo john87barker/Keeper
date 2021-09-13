@@ -43,23 +43,6 @@ namespace Keeper.Services
       }
       return vaults;
 
-      //  if((userId != vaults.CreatorId && vaults.IsPrivate == true))
-      // {
-      //   // is the owner this person
-      //   throw new Exception("Invalid Id");
-      // }
-      // return vaults;
-
-
-      // List<Vault> vaults = _repo.GetVaultsByProfile(id);
-      // if (careIfPrivate)
-      // {
-      //   vaults = vaults.FindAll(v => v.IsPrivate == true);
-      // }
-      // return vaults;
-
-
-      //  return _repo.GetVaultsByProfile(id);
     }
     internal Vault Create(Vault newVault)
     {

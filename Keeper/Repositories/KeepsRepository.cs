@@ -15,7 +15,7 @@ namespace Keeper.Repositories
       _db = db;
     }
 
-// TODO Passing all but one of the get vaultkeeps: Array contains keeps | AssertionError: Returned array does not contain newly created keep, Make Sure you can successfully Post Keeps: expected undefined to be an object
+
 // TODO also need to pass the no auth get tests as well.
 // NOTE I can post keeps but it isn't taking a keep into the system I believe
      internal List<VaultKeepViewModel> GetVaultKeeps(int id)

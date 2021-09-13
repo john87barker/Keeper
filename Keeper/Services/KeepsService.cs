@@ -22,8 +22,10 @@ namespace Keeper.Services
     {
       List<VaultKeepViewModel> keeps = _repo.GetVaultKeeps(id);
       
+      return keeps;
+      // if(userId != )
 
-      return _repo.GetVaultKeeps(id);
+      // return _repo.GetVaultKeeps(id);
     }
      internal Keep GetById(int id)
     {
