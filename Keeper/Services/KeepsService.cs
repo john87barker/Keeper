@@ -8,10 +8,12 @@ namespace Keeper.Services
   public class KeepsService
   {
     private readonly KeepsRepository _repo;
+  private readonly VaultsService _vaultsService;
 
-    public KeepsService(KeepsRepository repo)
+    public KeepsService(KeepsRepository repo, VaultsService vaultsService)
     {
       _repo = repo;
+      _vaultsService = vaultsService;
     }
 
       internal List<Keep> GetAll()
@@ -20,10 +22,18 @@ namespace Keeper.Services
     }
     internal List<VaultKeepViewModel> GetVaultKeeps(int id, string userId)
     {
+      // List<Vault> foundVs = _vaultsService.GetVaultsByProfile(userId, userId);
+      // if(userId == userId)
+      // {
+      // foundVs.FindAll(v => v != userId);
+      
+      // }
+      
       List<VaultKeepViewModel> keeps = _repo.GetVaultKeeps(id);
       
+
       return keeps;
-      // if(userId != )
+
 
       // return _repo.GetVaultKeeps(id);
     }
