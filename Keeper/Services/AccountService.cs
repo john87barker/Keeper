@@ -3,13 +3,20 @@ using Keeper.Repositories;
 
 namespace Keeper.Services
 {
-    public class AccountService
+  public class AccountService
     {
         private readonly AccountsRepository _repo;
         public AccountService(AccountsRepository repo)
         {
             _repo = repo;
         }
+
+    internal Profile GetProfileById(string id)
+    {
+      return _repo.GetById(id);
+    }
+
+
 
         internal string GetProfileEmailById(string id)
         {
@@ -19,7 +26,10 @@ namespace Keeper.Services
         {
             return _repo.GetByEmail(email);
         }
-        internal Account GetOrCreateProfile(Account userInfo)
+
+
+
+    internal Account GetOrCreateProfile(Account userInfo)
         {
             Account profile = _repo.GetById(userInfo.Id);
             if (profile == null)

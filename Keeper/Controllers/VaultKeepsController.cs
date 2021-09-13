@@ -21,6 +21,7 @@ namespace Keeper.Controllers
 
     [HttpPost]
     [Authorize]
+    // TODO Fix the invalid auth part of the tests
     public async Task<ActionResult<VaultKeep>> Create([FromBody] VaultKeep newVK)
     {
       try
@@ -39,6 +40,7 @@ namespace Keeper.Controllers
 
     [HttpDelete("{id}")]
     [Authorize]
+   // TODO Fix the invalid auth part of the tests
     public async Task<ActionResult<String>> Delete(int id)
     {
       try

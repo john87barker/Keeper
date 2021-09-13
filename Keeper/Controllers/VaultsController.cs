@@ -44,7 +44,7 @@ namespace Keeper.Controllers
       try
       {
           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-          List<VaultKeepViewModel> keeps = _keepsService.GetMyKeeps(id);
+          List<VaultKeepViewModel> keeps = _keepsService.GetVaultKeeps(id);
           return Ok(keeps);
       }
       catch (Exception err)

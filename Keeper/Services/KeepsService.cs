@@ -18,9 +18,9 @@ namespace Keeper.Services
     {
       return _repo.GetAll();
     }
-       internal List<VaultKeepViewModel> GetMyKeeps(int id)
+       internal List<VaultKeepViewModel> GetVaultKeeps(int id)
     {
-      return _repo.GetMyKeeps(id);
+      return _repo.GetVaultKeeps(id);
     }
      internal Keep GetById(int id)
     {
@@ -49,6 +49,11 @@ namespace Keeper.Services
       original.Img = editedK.Img ?? original.Img;
       _repo.Edit(original);
       return original;
+    }
+
+    internal List<VaultKeepViewModel> GetKeepsByProfile(string id)
+    {
+      return _repo.GetKeepsByProfile(id);
     }
 
     internal void Delete(int id, string userId)

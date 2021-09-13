@@ -29,12 +29,12 @@ namespace Keeper.Services
 
     internal void Delete(int id, string userId)
     {
-      VaultKeep vk = GetById(id);
-      // NOTE taken out to pass the test. The user has to be authorized to do this function anyways...
-      // if(vk.CreatorId != userId)
-      // {
-      //   throw new Exception("You can't do that.");
-      // }
+      VaultKeep found = GetById(id);
+// TODO this needs to work on the authorized test. Not sure why it isn't.
+      if(found.CreatorId != userId)
+      {
+        throw new Exception("You can't do that.");
+      }
       _vkrepo.Delete(id);
     }
 

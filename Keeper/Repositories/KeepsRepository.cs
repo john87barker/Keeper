@@ -16,8 +16,9 @@ namespace Keeper.Repositories
     }
 
 // TODO Passing all but one of the get vaultkeeps: Array contains keeps | AssertionError: Returned array does not contain newly created keep, Make Sure you can successfully Post Keeps: expected undefined to be an object
+// TODO also need to pass the no auth get tests as well.
 // NOTE I can post keeps but it isn't taking a keep into the system I believe
-     internal List<VaultKeepViewModel> GetMyKeeps(int id)
+     internal List<VaultKeepViewModel> GetVaultKeeps(int id)
     {
       string sql = @"
       SELECT
@@ -50,6 +51,23 @@ namespace Keeper.Repositories
         return k;
       }, splitOn: "id").ToList();
     }
+
+    internal List<VaultKeepViewModel> GetKeepsByProfile(string id)
+    {
+      string sql = @"
+      SELECT
+        a.*,
+        k.*
+        FROM keeps k
+        JOIN accounts a ON a.id = k.creatorId
+        WHERE k.creatorId = @id;
+        
+      ";
+      return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
+      {
+        vk.Creator = p;
+        return vk;
+      }, new {id}, splitOn: "id").ToList();    }
 
     internal Keep GetById(int id)
     {

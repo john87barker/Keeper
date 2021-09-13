@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -42,6 +43,23 @@ namespace Keeper.Repositories
         v.Creator = p;
         return v;
       }, new { id }, splitOn: "id").FirstOrDefault();
+    }
+
+    internal List<Vault> GetVaultsByProfile(string id)
+    {
+      string sql = @"
+      SELECT
+        a.*,
+        v.*
+        FROM vaults v
+        JOIN accounts a ON a.id = v.creatorId
+        WHERE v.creatorId = @id;
+      ";
+      return _db.Query<Profile, Vault, Vault>(sql, (p, v) =>
+      {
+        v.Creator = p;
+        return v;
+      }, new {id}, splitOn: "id").ToList();
     }
 
     internal Vault Edit(Vault updatedData)
