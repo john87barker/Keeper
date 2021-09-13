@@ -18,8 +18,11 @@ namespace Keeper.Services
     {
       return _repo.GetAll();
     }
-       internal List<VaultKeepViewModel> GetVaultKeeps(int id)
+    internal List<VaultKeepViewModel> GetVaultKeeps(int id, string userId)
     {
+      List<VaultKeepViewModel> keeps = _repo.GetVaultKeeps(id);
+      
+
       return _repo.GetVaultKeeps(id);
     }
      internal Keep GetById(int id)

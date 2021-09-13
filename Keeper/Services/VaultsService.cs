@@ -86,8 +86,6 @@ namespace Keeper.Services
       return original;
     }
 
-
-
     internal void Delete(int id, string userId)
     {
       Vault toDelete = GetById(id, userId);

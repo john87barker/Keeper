@@ -20,15 +20,33 @@ namespace Keeper.Repositories
 // NOTE I can post keeps but it isn't taking a keep into the system I believe
      internal List<VaultKeepViewModel> GetVaultKeeps(int id)
     {
+      // string sql = @"
+      // SELECT
+      //   a.*,
+      //   k.*,
+      //   vk.id AS vaultKeepsId
+      //   FROM vaultKeeps vk
+      //   JOIN keeps k ON vk.vaultId = k.id
+      //   JOIN accounts a ON a.id = k.creatorId
+      //   WHERE vk.vaultId = @id;
+      // ";
+      // 
+      //   string sql = @"
+      // SELECT
+      //   a.*,
+      //   k.*
+        
+      // FROM keeps k
+      // JOIN accounts a ON a.id = k.creatorId
+      
       string sql = @"
       SELECT
         a.*,
-        k.*,
-        vk.id AS vaultKeepsId
-        FROM vaultKeeps vk
-        JOIN keeps k ON vk.vaultId = k.id
-        JOIN accounts a ON a.id = k.creatorId
-        WHERE vk.vaultId = @id;
+        k.*
+        
+      FROM keeps k
+      JOIN accounts a ON a.id = k.creatorId
+      
       ";
       return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
       {
