@@ -5,7 +5,7 @@
     <div class="row pb-2">
       <div class="col-md-12 d-flex justify-content-between">
         <h2>
-          My Keeps
+          My Vaults
         </h2>
         <button type="button" class="btn btn-outline-secondary ml-2">
           +

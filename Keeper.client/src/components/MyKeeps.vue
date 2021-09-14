@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { computed, reactive } from '@vue/runtime-core'
-import { AppState } from '../AppState'
+// import { computed, reactive } from '@vue/runtime-core'
+// import { AppState } from '../AppState'
 export default {
   props: {
     keep: {
@@ -24,9 +24,8 @@ export default {
     }
   },
   setup() {
-    const state = reactive()
     return {
-      state
+
     }
   },
   components: {}
