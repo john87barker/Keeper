@@ -1,54 +1,43 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column  justify-content-around container">
-    <div class="row masonry">
-      <div class="col-md-3 d-flex justify-content-around " v-for="k in keeps" :key="k.id">
-        <Keeps :keeps="k" />
-      </div>
+  <div class="row masonry-items">
+    <img :src="keeps.img" class="img py-2" alt="">
+    <div class="card-img-overlay masonry-content">
+      <!-- <h3 class="card-title">
+        {{ keeps.name }}
+      </h3> -->
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
-import { AppState } from '../AppState'
-import Pop from '../utils/Notifier'
-import { keepsService } from '../services/KeepsService'
-
 export default {
-  name: 'Home',
-  setup() {
-    onMounted(async() => {
-      try {
-        await keepsService.getAll()
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-    })
-    return {
-      keeps: computed(() => AppState.keeps)
+  props: {
+    keeps: {
+      type: Object,
+      required: true
     }
-  }
+  },
+  setup() {
+    return {}
+  },
+  components: {}
 }
 </script>
 
-<style scoped lang="scss">
-.home{
-  text-align: center;
-  user-select: none;
-  > img{
-    height: 200px;
-    width: 200px;
-  }
+<style lang="scss" scoped>
+.img{
+  // height: 20rem;
+  max-width: 20rem;
+  object-fit: contain;
 }
-.container{
-  display: grid;
-  grid-template-columns: 2fr, 1fr, 1fr;
-  gap: 10px;
+.words{
+  text-shadow:1px 1px 15px black;
 }
-body {
-  background-color: #cccccc;
-  color: #333333;
-}
+// .container{
+//   display: grid;
+//   grid-template-columns: 2fr, 1fr, 1fr;
+//   gap: 10px;
+// }
 .masonry-wrapper {
   padding: 1.5em;
   max-width: 960px;
@@ -119,17 +108,4 @@ body {
 .masonry-footer:hover, .masonry-footer:active, .masonry-footer:focus {
   opacity: .75;
 }
-
-// .masonry {
-//   display: grid;
-//   gap: 2em;
-//   grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) );
-//   grid-auto-rows: 250px;
-// }
-// .col--2x {
-//    grid-row-end: span 2;
-// }
-// .col--3x {
-//    grid-row-end: span 3;
-// }
 </style>

@@ -8,10 +8,12 @@ namespace Keeper.Services
   public class VaultsService
   {
     private readonly VaultsRepository _repo;
+    private readonly KeepsRepository _krepo;
 
-    public VaultsService(VaultsRepository repo)
+    public VaultsService(VaultsRepository repo, KeepsRepository krepo)
     {
       _repo = repo;
+      _krepo = krepo;
     }
 
     internal Vault GetById(int id, string userId)
@@ -28,6 +30,19 @@ namespace Keeper.Services
       }
       return vault;
     }
+    // internal List<Vault> GetVaultKeeps(int id, string userId, bool isPrivate = true)
+    // {
+    //   // List<Vault> vaultkeeps = _krepo.GetVaultKeeps(id);
+    //   // if(userId == vaultkeeps)
+    //   // {
+    //   //   return vaultkeeps;
+    //   // }
+    //   if (isPrivate)
+    //   {
+    //     vaultkeeps = vaultkeeps.FindAll(v => v.IsPrivate != true);
+    //   }
+    //   return vaultkeeps;
+    // }
 
     internal List<Vault> GetVaultsByProfile(string id, string userId, bool isPrivate = true)
     {

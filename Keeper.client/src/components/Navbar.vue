@@ -42,7 +42,7 @@
           Login
         </button>
 
-        <div class="dropdown" v-else>
+        <div class="dropdown border p-2 rounded" v-else>
           <div
             class="dropdown-toggle"
             @click="state.dropOpen = !state.dropOpen"
@@ -60,9 +60,9 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
+            <router-link :to="{ name: 'Profile' }">
               <div class="list-group-item list-group-item-action hoverable">
-                Account
+                Profile
               </div>
             </router-link>
             <div
