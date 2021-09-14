@@ -1,10 +1,10 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column  justify-content-around container">
-    <div class="row masonry">
-      <div class="col-md-3 d-flex justify-content-around " v-for="k in keeps" :key="k.id">
-        <Keeps :keeps="k" />
-      </div>
+  <div class="home flex-grow-1   container-fluid card-columns">
+    <!-- <div class="row "> -->
+    <div class="py-2 card" v-for="k in keeps" :key="k.id">
+      <Keeps :keeps="k" />
     </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
   }
 }
 .container{
-  display: grid;
+  display: inline-block;
   grid-template-columns: 2fr, 1fr, 1fr;
   gap: 10px;
 }
@@ -49,87 +49,5 @@ body {
   background-color: #cccccc;
   color: #333333;
 }
-.masonry-wrapper {
-  padding: 1.5em;
-  max-width: 960px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.masonry {
-  columns: 1;
-  column-gap: 10px;
-}
-.masonry-item {
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 10px;
-}
-@media only screen and (max-width: 1023px) and (min-width: 768px) {  .masonry {
-    columns: 2;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .masonry {
-    columns: 3;
-  }
-}
-.masonry-item, .masonry-content {
-  border-radius: 4px;
-  overflow: hidden;
-}
-.masonry-item {
-  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, .3));
-  transition: filter .25s ease-in-out;
-}
-.masonry-item:hover {
-  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, .3));
-}
-.masonry-content {
-  overflow: hidden;
-}
-.masonry-item {
-  color: #111111;
-  background-color: #f9f9f9;
-}
-.masonry-title, .masonry-description {
-  margin: 0;
-}
-.masonry-title {
-  font-weight: 700;
-  font-size: 1.1rem;
-  padding: 1rem 1.5rem;
-}
-.masonry-description {
-  padding: 1.5rem;
-  font-size: .75rem;
-  border-top: 1px solid rgba(0, 0, 0, .05);
-}
-.masonry-footer {
-  font-size: .75em;
-  opacity: .25;
-  text-align: center;
-  padding-top: 3em;
-  padding-bottom: 3em;
-  margin-bottom: -1.5em;
-  transition: opacity 1s ease-in-out;
-}
-.masonry-footer a {
-  color: currentColor;
-}
-.masonry-footer:hover, .masonry-footer:active, .masonry-footer:focus {
-  opacity: .75;
-}
 
-// .masonry {
-//   display: grid;
-//   gap: 2em;
-//   grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) );
-//   grid-auto-rows: 250px;
-// }
-// .col--2x {
-//    grid-row-end: span 2;
-// }
-// .col--3x {
-//    grid-row-end: span 3;
-// }
 </style>
