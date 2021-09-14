@@ -6,7 +6,7 @@
         {{ keep.name }}
 
         <div>
-          <img :src="keep.creator.picture" class="rounded-pill pic" alt="" @click="goToProfile">
+          <img :src="keep.creator.picture" class="rounded-pill pic" alt="">
         </div>
       </h3>
     </div>
@@ -16,8 +16,6 @@
 <script>
 import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { useRoute } from 'vue-router'
-import { router } from '../router'
 export default {
   props: {
     keep: {
@@ -25,18 +23,10 @@ export default {
       required: true
     }
   },
-  setup(props) {
+  setup() {
     const state = reactive()
-    const route = useRoute()
     return {
-      user: computed(() => AppState.user),
-      state,
-      route,
-      account: computed(() => AppState.account),
-      goToProfile() {
-        // console.log(props.keep.creatorId)
-        router.push({ name: 'Profile', params: { id: props.keep.creatorId } })
-      }
+      state
     }
   },
   components: {}
@@ -47,13 +37,4 @@ export default {
 .pic{
   width: 3rem;
 }
-.words{
-  text-shadow:1px 1px 15px black;
-}
-// .container{
-//   display: grid;
-//   grid-template-columns: 2fr, 1fr, 1fr;
-//   gap: 10px;
-// }
-
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div class="home flex-grow-1   container-fluid card-columns">
-    <!-- <div class="row "> -->
     <div class="py-2 card" v-for="k in keeps" :key="k.id">
-      <Keeps :keeps="k" />
+      <Keeps :keep="k" />
     </div>
-    <!-- </div> -->
   </div>
 </template>
 

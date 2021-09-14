@@ -1,37 +1,63 @@
 <template>
-  <div class="about text-center container-fluid">
-    <div class="row pt-5">
-      <div class="col-md-3">
-        <img class="rounded img" :src="profile.picture" alt="" />
-      </div>
-      <div class="col-md-9 text-left">
-        <h1>{{ profile.name }}</h1>
-        <h5>Vaults: profile persons amount</h5>
-        <h5>Keeps: profile persons amount</h5>
+  <div class=" text-center container">
+    <ProfileComponent />
+    <!-- VAULTS -->
+    <div class="row pb-2">
+      <div class="col-md-12 d-flex justify-content-between">
+        <h2>
+          My Keeps
+        </h2>
+        <button type="button" class="btn btn-outline-secondary ml-2">
+          +
+        </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 d-flex ">
-        <h3>
-          Vaults
-        </h3>
-        <img src="" alt="">
+    <div class="card-columns">
+      <div class=" card" v-for="v in vaults" :key="v.id">
+        <MyVaults :vault="v" />
       </div>
-      <div class="col-md-12">
-        Users Vaults
+    </div>
+
+    <!-- KEEPS -->
+    <div class="row pb-2">
+      <div class="col-md-12 d-flex justify-content-between">
+        <h2>
+          My Keeps
+        </h2>
+        <button type="button" class="btn btn-outline-secondary ml-2">
+          +
+        </button>
+      </div>
+    </div>
+    <div class="card-columns">
+      <div class=" card" v-for="k in keeps" :key="k.id">
+        <MyKeeps :keep="k" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { keepsService } from '../services/KeepsService'
+import { useRoute } from 'vue-router'
+import Pop from '../utils/Notifier'
 export default {
   name: 'Profile',
   setup() {
+    const route = useRoute()
+    onMounted(async() => {
+      try {
+        await keepsService.getMyKeeps(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+    })
     return {
-      profile: computed(() => AppState.account)
+      profile: computed(() => AppState.account),
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults)
     }
   }
 }
