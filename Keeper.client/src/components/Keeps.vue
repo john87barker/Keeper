@@ -1,16 +1,19 @@
 <template>
-  <img :src="keep.img" class="card-img  w-100 rounded" alt="">
-  <div class="card-img-overlay ">
-    <div>
-      <h3 class="card-title d-flex justify-content-between align-text-bottom text-primary words">
-        {{ keep.name }}
+  <div data-toggle="modal" data-target="#activeKeepModal" @click.stop="setActiveKeep">
+    <img :src="keep.img" class="card-img  w-100 rounded" alt="">
+    <div class="card-img-overlay ">
+      <div>
+        <h3 class="card-title d-flex justify-content-between align-text-bottom text-dark words">
+          {{ keep.name }}
 
-        <div>
-          <img :src="keep.creator.picture" class="rounded-pill pic" alt="" @click="goToProfile">
-        </div>
-      </h3>
+          <div>
+            <img :src="keep.creator.picture" class="rounded-pill pic action" alt="" @click="goToProfile">
+          </div>
+        </h3>
+      </div>
     </div>
   </div>
+  <KeepModal />
 </template>
 
 <script>
@@ -26,16 +29,19 @@ export default {
     }
   },
   setup(props) {
-    const state = reactive()
+    // const state = reactive()
     const route = useRoute()
     return {
       user: computed(() => AppState.user),
-      state,
+      // state,
       route,
       account: computed(() => AppState.account),
       goToProfile() {
         // console.log(props.keep.creatorId)
         router.push({ name: 'Profile', params: { id: props.keep.creatorId } })
+      },
+      setActiveKeep() {
+        AppState.activeKeep = props.keep
       }
     }
   },
@@ -48,7 +54,7 @@ export default {
   width: 3rem;
 }
 .words{
-  text-shadow:1px 1px 15px black;
+  text-shadow:1px 1px 15px white;
 }
 // .container{
 //   display: grid;

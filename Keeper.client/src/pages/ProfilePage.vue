@@ -2,13 +2,13 @@
   <div class=" text-center container">
     <ProfileComponent />
     <!-- VAULTS -->
-    <div class="row pb-2">
+    <div class="row pb-3">
       <div class="col-md-12 d-flex justify-content-between">
         <h2>
           My Vaults
         </h2>
-        <button type="button" class="btn btn-outline-secondary ml-2">
-          +
+        <button type="button" class="btn btn-outline-secondary shadow" data-target="#create-vault-modal" data-toggle="modal">
+          + New Vault
         </button>
       </div>
     </div>
@@ -19,13 +19,14 @@
     </div>
 
     <!-- KEEPS -->
-    <div class="row pb-2">
+    <div class="row pb-3">
       <div class="col-md-12 d-flex justify-content-between">
         <h2>
           My Keeps
         </h2>
+
         <button type="button" class="btn btn-outline-secondary ml-2">
-          +
+          + New Keep
         </button>
       </div>
     </div>
@@ -35,29 +36,38 @@
       </div>
     </div>
   </div>
+  <CreateVaultModal />
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
+import { vaultsService } from '../services/VaultsService'
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Notifier'
 export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
+    const state = reactive({
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults)
+    })
     onMounted(async() => {
       try {
         await keepsService.getMyKeeps(route.params.id)
+        await vaultsService.getMyVaults(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
     })
     return {
+      state,
       profile: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.vaults)
+
     }
   }
 }
