@@ -1,19 +1,18 @@
 <template>
-  <div data-toggle="modal" data-target="#activeKeepModal" @click.stop="setActiveKeep">
-    <img :src="keep.img" class="card-img  w-100 rounded" alt="">
+  <div data-target="#activeKeepModal" data-toggle="modal" @click.prevent="setActiveKeep">
+    <img :src="keep.img" class="card-img  w-100 rounded shadow" alt="">
     <div class="card-img-overlay ">
       <div>
         <h3 class="card-title d-flex justify-content-between align-text-bottom text-dark words">
           {{ keep.name }}
 
           <div>
-            <img :src="keep.creator.picture" class="rounded-pill pic action" alt="" @click="goToProfile">
+            <img :src="keep.creator.picture" class="rounded-pill pic action" alt="" @click.stop="goToProfile">
           </div>
         </h3>
       </div>
     </div>
   </div>
-  <KeepModal />
 </template>
 
 <script>
@@ -40,7 +39,7 @@ export default {
         // console.log(props.keep.creatorId)
         router.push({ name: 'Profile', params: { id: props.keep.creatorId } })
       },
-      setActiveKeep() {
+      async setActiveKeep() {
         AppState.activeKeep = props.keep
       }
     }

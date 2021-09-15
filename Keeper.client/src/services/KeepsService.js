@@ -20,5 +20,9 @@ class KeepsService {
     logger.log(res.data)
     AppState.keeps.push(res.data)
   }
+
+  async deleteKeep(id) {
+    const res = await api.delete('api/keeps/' + id)
+  }
 }
 export const keepsService = new KeepsService()
