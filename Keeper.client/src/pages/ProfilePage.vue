@@ -25,7 +25,7 @@
           My Keeps
         </h2>
 
-        <button type="button" class="btn btn-outline-secondary ml-2">
+        <button type="button" class="btn btn-outline-secondary ml-2" data-target="#create-keep-modal" data-toggle="modal">
           + New Keep
         </button>
       </div>
@@ -36,6 +36,7 @@
       </div>
     </div>
   </div>
+  <CreateKeepModal />
   <CreateVaultModal />
 </template>
 
