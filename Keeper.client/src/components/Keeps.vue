@@ -1,5 +1,5 @@
 <template>
-  <div data-target="#activeKeepModal" data-toggle="modal" @click.prevent="setActiveKeep">
+  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep">
     <img :src="keep.img" class="card-img  w-100 rounded shadow" alt="">
     <div class="card-img-overlay ">
       <div>
@@ -28,11 +28,13 @@ export default {
     }
   },
   setup(props) {
-    // const state = reactive()
+    const state = reactive({
+      keeps: computed(() => AppState.keeps)
+    })
     const route = useRoute()
     return {
       user: computed(() => AppState.user),
-      // state,
+      state,
       route,
       account: computed(() => AppState.account),
       goToProfile() {

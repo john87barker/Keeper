@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { keepsService } from '../services/KeepsService'
@@ -15,6 +15,9 @@ import { keepsService } from '../services/KeepsService'
 export default {
   name: 'Home',
   setup() {
+    const state = reactive({
+      keeps: computed(() => AppState.keeps)
+    })
     onMounted(async() => {
       try {
         await keepsService.getAll()
@@ -23,6 +26,7 @@ export default {
       }
     })
     return {
+      state,
       keeps: computed(() => AppState.keeps)
     }
   }

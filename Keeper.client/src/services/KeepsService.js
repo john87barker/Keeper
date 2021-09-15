@@ -22,7 +22,8 @@ class KeepsService {
   }
 
   async deleteKeep(id) {
-    const res = await api.delete('api/keeps/' + id)
+    await api.delete('api/keeps/' + id)
+    this.getAll()
   }
 }
 export const keepsService = new KeepsService()

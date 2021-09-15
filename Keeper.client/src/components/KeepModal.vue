@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="activeKeepModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="active-keep-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
@@ -28,16 +28,27 @@
                   ____________________________
                 </div>
               </div>
-              <div class=" row d-flex justify-content-around pt-5 pl-1">
-                <div class="col-md-3">
-                  <button type="button" class="btn btn-outline-primary">
-                    Add to Vault
+              <div class=" row d-flex justify-content-center pt-5 ">
+                <div class="dropdown col-md-3 mr-3 pt-3">
+                  <button class="btn btn-primary btn-sm dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                  >
+                    Add to a Vault
                   </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
                 </div>
-                <div class="col-md-3 pt-3">
-                  <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep)">
+                <div class="col-md-3 pt-3" v-if="aKeep.creatorId == user.id">
+                  <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)">
                 </div>
-                <div class="col-md-3  mr-3" v-if="aKeep.creator">
+                <div class="col-md-3" v-if="aKeep.creator">
                   <img :src="aKeep.creator.picture" class="rounded img pr-2" alt="">
                 </div>
               </div>
@@ -54,6 +65,8 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { keepsService } from '../services/KeepsService'
+import $ from 'jquery'
+
 export default {
 
   name: 'Component',
@@ -67,10 +80,14 @@ export default {
     return {
       aKeep: computed(() => AppState.activeKeep),
       keeps: computed(() => AppState.keeps),
-      user: computed(() => AppState.user),
-      async deleteKeep(props) {
+      user: computed(() => AppState.account),
+      async deleteKeep(keepid) {
         try {
-          await keepsService.deleteKeep(props.keep.id)
+          // debugger
+          await keepsService.deleteKeep(keepid)
+          Pop.toast('You have deleted this keep!', 'success')
+          $('#active-keep-modal').modal('toggle')
+          $('.modal-backdrop').remove()
         } catch (error) {
           Pop.toast(error, 'error')
         }
