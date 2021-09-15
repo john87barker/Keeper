@@ -30,19 +30,23 @@ namespace Keeper.Services
       }
       return vault;
     }
-    // internal List<Vault> GetVaultKeeps(int id, string userId, bool isPrivate = true)
-    // {
-    //   // List<Vault> vaultkeeps = _krepo.GetVaultKeeps(id);
-    //   // if(userId == vaultkeeps)
-    //   // {
-    //   //   return vaultkeeps;
-    //   // }
-    //   if (isPrivate)
-    //   {
-    //     vaultkeeps = vaultkeeps.FindAll(v => v.IsPrivate != true);
-    //   }
-    //   return vaultkeeps;
-    // }
+internal List<VaultKeepViewModel> GetVaultKeeps(int id, string userId)
+    {
+      Vault v = _repo.GetById(id);
+
+      if(v == null)
+      {
+        throw new Exception("bad id given");
+      }
+      if(v.IsPrivate == true && v.CreatorId != userId)
+      {
+        throw new Exception("That is private");
+      }
+    
+      
+      
+      return _repo.GetVaultKeeps(id);
+    }
 
     internal List<Vault> GetVaultsByProfile(string id, string userId, bool isPrivate = true)
     {

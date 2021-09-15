@@ -18,45 +18,45 @@ namespace Keeper.Repositories
 
 // TODO also need to pass the no auth get tests as well.
 // NOTE I can post keeps but it isn't taking a keep into the system I believe
-     internal List<VaultKeepViewModel> GetVaultKeeps(int id)
-    {
-      // string sql = @"
-      // SELECT
-      //   a.*,
-      //   k.*,
-      //   vk.id AS vaultKeepsId
-      //   FROM vaultKeeps vk
-      //   JOIN keeps k ON vk.vaultId = k.id
-      //   JOIN accounts a ON a.id = k.creatorId
-      //   WHERE vk.vaultId = @id;
-      // ";
-      // 
-      //   string sql = @"
-      // SELECT
-      //   a.*,
-      //   k.*
+    //  internal List<VaultKeepViewModel> GetVaultKeeps(int id)
+    // {
+    //   // string sql = @"
+    //   // SELECT
+    //   //   a.*,
+    //   //   k.*,
+    //   //   vk.id AS vaultKeepsId
+    //   //   FROM vaultKeeps vk
+    //   //   JOIN keeps k ON vk.vaultId = k.id
+    //   //   JOIN accounts a ON a.id = k.creatorId
+    //   //   WHERE vk.vaultId = @id;
+    //   // ";
+    //   // 
+    //   //   string sql = @"
+    //   // SELECT
+    //   //   a.*,
+    //   //   k.*
         
-      // FROM keeps k
-      // JOIN accounts a ON a.id = k.creatorId
+    //   // FROM keeps k
+    //   // JOIN accounts a ON a.id = k.creatorId
       
-      string sql = @"
-      SELECT
-        a.*,
-        k.*,
-        vk.id AS vaultKeepId
+    //   string sql = @"
+    //   SELECT
+    //     a.*,
+    //     k.*,
+    //     vk.id AS vaultKeepId
 
-      FROM keeps k
-      JOIN accounts a ON a.id = k.creatorId
-      JOIN vaultKeeps vk ON vk.keepId = k.id;
+    //   FROM keeps k
+    //   JOIN accounts a ON a.id = k.creatorId
+    //   JOIN vaultKeeps vk ON vk.keepId = k.id;
       
       
-      ";
-      return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
-      {
-        vk.Creator = p;
-        return vk;
-      }, new {id}, splitOn: "id").ToList();
-    }
+    //   ";
+    //   return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
+    //   {
+    //     vk.Creator = p;
+    //     return vk;
+    //   }, new {id}, splitOn: "id").ToList();
+    // }
      internal List<Keep> GetAll()
     {
       string sql = @"
