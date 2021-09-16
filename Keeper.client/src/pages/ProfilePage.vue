@@ -1,6 +1,6 @@
 <template>
   <div class=" text-center container">
-    <ProfileComponent />
+    <ProfileComponent :vault="v" />
     <!-- VAULTS -->
     <div class="row pb-3">
       <div class="col-md-12 d-flex justify-content-between">

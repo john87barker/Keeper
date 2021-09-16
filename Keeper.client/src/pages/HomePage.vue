@@ -27,7 +27,8 @@ export default {
     })
     return {
       state,
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults)
     }
   }
 }

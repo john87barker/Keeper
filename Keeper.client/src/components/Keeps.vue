@@ -26,6 +26,10 @@ export default {
       type: Object,
       required: true
     }
+    // vaults: {
+    //   type: Object,
+    //   required: true
+    // }
   },
   setup(props) {
     const state = reactive({

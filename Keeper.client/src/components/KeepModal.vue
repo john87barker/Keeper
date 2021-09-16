@@ -39,10 +39,9 @@
                   >
                     Add to a Vault
                   </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="v in vaults" :key="v.id" :vault="v">
+                    <a class="dropdown-item" href="#">{{ vaults.name }}</a>
+                    <!-- <Dropdown :vault="v" /> -->
                   </div>
                 </div>
                 <div class="col-md-3 pt-3" v-if="aKeep.creatorId == user.id">
@@ -75,12 +74,17 @@ export default {
       type: Object,
       required: true
     }
+    // vaults: {
+    //   type: Object,
+    //   required: true
+    // }
   },
   setup(props) {
     return {
       aKeep: computed(() => AppState.activeKeep),
       keeps: computed(() => AppState.keeps),
       user: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
       async deleteKeep(keepid) {
         try {
           // debugger
