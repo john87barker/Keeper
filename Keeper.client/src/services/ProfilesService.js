@@ -9,8 +9,8 @@ class ProfilesService {
     const res = await api.get(`api/profiles/${id}`)
     logger.log(res.data)
     AppState.profiles = res.data
-    keepsService.getMyVaults()
-    vaultsService.getMyVaults()
+    // keepsService.getMyVaults()
+    // vaultsService.getMyVaults()
   }
 }
 export const profilesService = new ProfilesService()

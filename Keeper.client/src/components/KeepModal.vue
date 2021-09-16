@@ -29,11 +29,19 @@
                 </div>
               </div>
               <div class=" row d-flex justify-content-center pt-5 ">
-                <!-- <select v-model="state.selectedSprint" @change="assignVault(v.id)" :value="vault.name" class="pb-1 action">
-                  <option v-for="v in vaults" :value="v.id" :key="v.id">
-                    {{ vault.name }}
+                <!-- <p>{{ vaults }}</p> -->
+                <select v-model="state.selectedVault"
+                        :value="vaults.name"
+                        @change="assignVault(aKeep.id, user.id)"
+                >
+                  <!-- <option selected="selected" value="Add to Vault">
+                    Add to Vault
+                  </option> -->
+                  <option v-for="v in vaults" :value="v.id" :key="v.id" :vault="v">
+                    {{ v.name }}
                   </option>
-                </select> -->
+                </select>
+                <!-- NOTE if time to make the selector pretty i want to use the bootstrap button below -->
                 <!-- <div class="dropdown col-md-3 mr-3 pt-3">
                   <button class="btn btn-primary btn-sm dropdown-toggle"
                           type="button"
@@ -52,9 +60,11 @@
                 <div class="col-md-3 pt-3" v-if="aKeep.creatorId == user.id">
                   <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)">
                 </div>
-                <div class="col-md-3" v-if="aKeep.creator">
-                  <img :src="aKeep.creator.picture" class="rounded img pr-2" alt="">
-                </div>
+                <router-link :to="{ name: 'Profile', params: { id: aKeep.creatorId } }">
+                  <div class="col-md-3" @click="closeModal" v-if="aKeep.creator">
+                    <img :src="aKeep.creator.picture" class="rounded img pr-2">
+                  </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -65,11 +75,13 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { keepsService } from '../services/KeepsService'
 import $ from 'jquery'
+import { vaultsService } from '../services/VaultsService'
+import { router } from '../router'
 
 export default {
 
@@ -85,7 +97,13 @@ export default {
     // }
   },
   setup(props) {
+    const state = reactive({
+      selectedVault: '',
+      newVK: {}
+    })
     return {
+      state,
+
       aKeep: computed(() => AppState.activeKeep),
       keeps: computed(() => AppState.keeps),
       user: computed(() => AppState.account),
@@ -100,6 +118,19 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
+      },
+      async assignVault(keepId, userId) {
+        state.newVK.vaultId = state.selectedVault
+        state.newVK.creatorId = userId
+        state.newVK.keepId = keepId
+
+        await vaultsService.createVK(state.newVK)
+        Pop.toast('Successfully added to your vault!', 'success')
+        state.selectedVault = ''
+      },
+      async closeModal() {
+        $('#active-keep-modal').modal('toggle')
+        $('.modal-backdrop').remove()
       }
     }
   },

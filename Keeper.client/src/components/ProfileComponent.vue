@@ -1,11 +1,11 @@
 <template>
   <div class="row pt-5 pl-0 ">
     <div class="col-md-3 ">
-      <img :src="vault.picture" class="rounded-pill pic action" alt="">
+      <img :src="profile.picture" class="rounded-pill pic action" alt="">
     </div>
     <div class="col-md-9 text-left pb-5 ">
       <!-- <h1>{{ keeps }}</h1> -->
-      <h1>{{ user.nickname }}</h1>
+      <h1>{{ profile.name }}</h1>
       <h1>{{ vault.title }}</h1>
       <h5>Vaults: {{ vaults }} </h5>
       <h5>Keeps: {{ keeps }} </h5>
@@ -15,8 +15,10 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import Pop from '../utils/Notifier'
+import { profilesService } from '../services/ProfilesService'
 // import { computed } from '@vue/runtime-core'
 // import { AppState } from '../AppState'
 export default {
@@ -27,13 +29,18 @@ export default {
     }
   },
   setup() {
+    // onMounted(async() => {
+    //   try {
+
+    //   } catch (error) {
+    //     Pop.toast(error, 'error')
+    //   }
+    // })
     // const state = reactive()
     return {
-      user: computed(() => AppState.user),
-      vaults: computed(() => AppState.vaults.length),
-      vault: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps.length),
-      profiles: computed(() => AppState.vaults)
+      user: computed(() => AppState.user)
+
+      // profiles: computed(() => AppState.vaults)
     }
   },
   components: {}
