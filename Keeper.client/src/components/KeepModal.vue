@@ -29,7 +29,12 @@
                 </div>
               </div>
               <div class=" row d-flex justify-content-center pt-5 ">
-                <div class="dropdown col-md-3 mr-3 pt-3">
+                <!-- <select v-model="state.selectedSprint" @change="assignVault(v.id)" :value="vault.name" class="pb-1 action">
+                  <option v-for="v in vaults" :value="v.id" :key="v.id">
+                    {{ vault.name }}
+                  </option>
+                </select> -->
+                <!-- <div class="dropdown col-md-3 mr-3 pt-3">
                   <button class="btn btn-primary btn-sm dropdown-toggle"
                           type="button"
                           id="dropdownMenuButton"
@@ -41,9 +46,9 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="v in vaults" :key="v.id" :vault="v">
                     <a class="dropdown-item" href="#">{{ vaults.name }}</a>
-                    <!-- <Dropdown :vault="v" /> -->
-                  </div>
-                </div>
+                    <Dropdown :vault="v" />
+              </div>
+            </div> -->
                 <div class="col-md-3 pt-3" v-if="aKeep.creatorId == user.id">
                   <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)">
                 </div>

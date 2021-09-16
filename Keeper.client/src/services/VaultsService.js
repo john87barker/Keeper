@@ -4,13 +4,19 @@ import { api } from './AxiosService'
 class VaultsService {
   async getMyVaults(id) {
     const res = await api.get(`api/profiles/${id}/vaults`)
-    logger.log(res.data)
+    // logger.log(res.data)
     AppState.vaults = res.data
   }
 
-  async getVaultKeeps(id) {
+  async getVaultById(id) {
+    const res = await api.get(`api/vaults/${id}`)
+    // logger.log(res.data)
+    AppState.activeVault = res.data
+  }
+
+  async getKeepsByVault(id) {
     const res = await api.get(`api/vaults/${id}/keeps`)
-    logger.log(res.data)
+    // logger.log(res.data)
     AppState.vaultKeeps = res.data
   }
 

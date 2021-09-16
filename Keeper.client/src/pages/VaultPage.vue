@@ -1,13 +1,23 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-md-12 d-flex">
+        <h1 class="pr-3 pt-3">
+          {{ vault.name }}
+        </h1>
+        <div class="pt-4">
+          <img src="../assets/img/delete.png" alt="">
+        </div>
+      </div>
       <div class="col-md-12">
-        {{ vault }}
-        <img src="../assets/img/delete.png" alt="">
+        <h5>
+          Keeps: {{ vkLength }}
+        </h5>
       </div>
       <div class="card-columns">
-        <div class="card" v-for="k in keeps" :key="k.id">
-          <MyKeeps :keep="k" />
+        <!-- {{ vk }} -->
+        <div class="card" v-for="v in vk" :key="v.id">
+          <MyVaultKeeps :vk="v" />
         </div>
       </div>
     </div>
@@ -26,19 +36,21 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
-      keeps: computed(() => AppState.keeps)
+      vk: computed(() => AppState.vaultKeeps)
     })
     onMounted(async() => {
       try {
-        await vaultsService.getVaultKeeps(route.params.id)
+        await vaultsService.getVaultById(route.params.id)
+        await vaultsService.getKeepsByVault(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
     })
     return {
       state,
-      vault: computed(() => AppState.vaults),
-      vk: computed(() => AppState.keeps)
+      vault: computed(() => AppState.activeVault),
+      vk: computed(() => AppState.vaultKeeps),
+      vkLength: computed(() => AppState.vaultKeeps.length)
     }
   },
   components: {}
