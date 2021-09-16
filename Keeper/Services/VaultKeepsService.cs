@@ -26,13 +26,15 @@ namespace Keeper.Services
     }
     internal VaultKeep Create(VaultKeep newVK, string userId)
     {
-      // TODO the newVK.vaultId needs to match a vaultId on the users vaults... 
+      
       Vault foundV = _vaultsService.GetById(newVK.VaultId, userId);
       if(userId != foundV.CreatorId)
       {
         throw new Exception("you can't do that");
       }
-      return _vkrepo.Create(newVK);
+      var vk =  _vkrepo.Create(newVK);
+      // TODO call to keepsrepo and increase keeps count on newVK.keepId
+      return vk;
     }
 
     internal void Delete(int id, string userId)

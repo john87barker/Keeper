@@ -5,8 +5,9 @@
         <h1 class="pr-3 pt-3">
           {{ vault.name }}
         </h1>
-        <div class="pt-4">
-          <img src="../assets/img/delete.png" alt="">
+
+        <div class="pt-4" v-if="user.id == profile.id">
+          <img src="../assets/img/delete.png" alt="" @click="deleteKeep(vault.id)">
         </div>
       </div>
       <div class="col-md-12">
@@ -31,6 +32,8 @@ import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
 import { useRoute } from 'vue-router'
+import Swal from 'sweetalert2'
+import { router } from '../router'
 export default {
   name: 'Component',
   setup() {
@@ -40,17 +43,44 @@ export default {
     })
     onMounted(async() => {
       try {
-        await vaultsService.getVaultById(route.params.id)
         await vaultsService.getKeepsByVault(route.params.id)
+        await vaultsService.getVaultById(route.params.id)
       } catch (error) {
-        Pop.toast(error, 'error')
+        router.push({ name: 'Home' })
       }
     })
     return {
       state,
       vault: computed(() => AppState.activeVault),
       vk: computed(() => AppState.vaultKeeps),
-      vkLength: computed(() => AppState.vaultKeeps.length)
+      vkLength: computed(() => AppState.vaultKeeps.length),
+      user: computed(() => AppState.account),
+      profile: computed(() => AppState.profiles),
+      async deleteKeep(vaultId) {
+        try {
+          await Swal.fire({
+            title: 'Are you sure you want to delete this Vault?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085D6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+              await vaultsService.deleteVault(vaultId)
+              router.push({ name: 'Home' })
+              Swal.fire(
+                'You got it, dude!',
+                'May you shelter in the palm of the Creator\'s hand, and may the last embrace of the mother welcome you home. -Shinaran Funeral Saying',
+                'success'
+              )
+            }
+          })
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   },
   components: {}

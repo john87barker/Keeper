@@ -47,39 +47,20 @@ namespace Keeper.Repositories
 
 internal List<VaultKeepViewModel> GetVaultKeeps(int id)
     {
-      // string sql = @"
-      // SELECT
-      //   a.*,
-      //   k.*,
-      //   vk.id AS vaultKeepsId
-      //   FROM vaultKeeps vk
-      //   JOIN keeps k ON vk.vaultId = k.id
-      //   JOIN accounts a ON a.id = k.creatorId
-      //   WHERE vk.vaultId = @id;
-      // ";
-      // 
-      //   string sql = @"
-      // SELECT
-      //   a.*,
-      //   k.*
-        
-      // FROM keeps k
-      // JOIN accounts a ON a.id = k.creatorId
+    
       
       string sql = @"
       SELECT
         a.*,
-    
+
         k.*,
         vk.id AS vaultKeepId
 
       FROM vaultKeeps vk
       JOIN accounts a ON a.id = vk.creatorId
-      JOIN keeps k ON k.id = vk.keepId;
-      
-      
-      
-      
+      JOIN keeps k ON k.id = vk.keepId
+      WHERE vk.vaultId = @id;
+  
       ";
       return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
       {

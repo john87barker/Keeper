@@ -50,10 +50,14 @@ namespace Keeper.Repositories
     internal VaultKeep Create(VaultKeep newVK)
     {
       string sql = @"
+      UPDATE keeps k
+       SET k.keeps = k.keeps + 1;
+
       INSERT INTO vaultKeeps 
       (keepId, vaultId, creatorId) 
       VALUES 
-      (@KeepId, @VaultId, @CreatorId); 
+      (@KeepId, @VaultId, @CreatorId);
+     
       SELECT LAST_INSERT_ID();";
       newVK.Id = _db.ExecuteScalar<int>(sql, newVK);
       return newVK;
