@@ -2,7 +2,7 @@
   <div class=" text-center container">
     <div class="row pt-5 pl-0 ">
       <div class="col-md-3 ">
-        <img :src="profile.picture" class="rounded-pill pic action" alt="">
+        <img :src="profile.picture" class="rounded-pill pic action " alt="">
       </div>
       <div class="col-md-9 text-left pb-5 ">
         <!-- <h1>{{ keeps }}</h1> -->
@@ -15,13 +15,12 @@
     <!-- VAULTS -->
 
     <div class="row pb-3">
-      <div class="col-md-12 d-flex justify-content-between">
+      <div class="col-md-12 d-flex justify-content-between py-4">
         <h2>
           My Vaults
         </h2>
-        <!-- FIXME v-if isn't right -->
         <div v-if="user.id == profile.id">
-          <button type="button" class="btn btn-outline-secondary shadow" data-target="#create-vault-modal" data-toggle="modal">
+          <button type="button" class="btn btn-outline-secondary shadow" data-target="#create-vault-modal" data-toggle="modal" title="Create a Vault">
             + New Vault
           </button>
         </div>
@@ -35,12 +34,12 @@
 
     <!-- KEEPS -->
     <div class="row pb-3">
-      <div class="col-md-12 d-flex justify-content-between">
+      <div class="col-md-12 d-flex justify-content-between py-4">
         <h2>
           My Keeps
         </h2>
         <div v-if="user.id == profile.id">
-          <button type="button" class="btn btn-outline-secondary ml-2" data-target="#create-keep-modal" data-toggle="modal">
+          <button type="button" class="btn btn-outline-secondary ml-2" data-target="#create-keep-modal" data-toggle="modal" title="Create a Keep">
             + New Keep
           </button>
         </div>
@@ -98,5 +97,6 @@ export default {
 <style scoped>
 img {
   width: 10rem;
+  box-shadow: 5px 5px 15px black;
 }
 </style>

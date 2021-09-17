@@ -7,12 +7,12 @@
         </h1>
 
         <div class="pt-4" v-if="user.id == profile.id">
-          <img src="../assets/img/delete.png" alt="" @click="deleteKeep(vault.id)">
+          <img src="../assets/img/delete.png" alt="" @click="deleteKeep(vault.id)" title="delete vault" class="a pt-2 ml-5">
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 ">
         <h5>
-          Keeps: {{ vkLength }}
+          <em>Keeps: </em>{{ vkLength }}
         </h5>
       </div>
       <div class="card-columns">

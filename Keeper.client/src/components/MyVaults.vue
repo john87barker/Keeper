@@ -1,9 +1,9 @@
 <template>
-  <div @click="goToVault">
+  <div @click="goToVault" class="a">
     <img :src="vault.img" class="card-img  w-100 rounded" alt="">
     <div class="card-img-overlay ">
       <div>
-        <h3 class="card-title d-flex justify-content-between align-text-bottom text-dark words">
+        <h3 class="card-title d-flex justify-content-between align-text-bottom  words">
           {{ vault.name }}
         </h3>
       </div>
@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .words{
-  text-shadow:1px 1px 15px white;
+  color: white;
+  text-shadow:10px 10px 50px black;
 }
 </style>

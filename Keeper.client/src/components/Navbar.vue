@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center bg-primary">
         <img
           alt="logo"
-          src="../assets/img/cw-logo.png"
+          src="../assets/img/keeper.svg"
           height="45"
         />
       </div>
@@ -23,17 +23,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
+          <router-link :to="{ name: 'Home' }" class="nav-link text-light">
             Home
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
+          <router-link :to="{ name: 'Profile', params: {id: account.id}}" class="nav-link text-light">
+            My Profile
           </router-link>
         </li>
       </ul>
-      <span class="navbar-text">
+      <span class="navbar-text text-light">
         <button
           class="btn btn-outline-primary text-uppercase"
           @click="login"
@@ -42,7 +42,7 @@
           Login
         </button>
 
-        <div class="dropdown border p-2 rounded" v-else>
+        <div class="dropdown border p-2 rounded a" v-else>
           <div
             class="dropdown-toggle"
             @click="state.dropOpen = !state.dropOpen"
@@ -60,11 +60,7 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <!-- <router-link :to="{ name: 'Profile' }"> -->
-            <div class="list-group-item list-group-item-action hoverable">
-              Profile
-            </div>
-            <!-- </router-link> -->
+
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
@@ -90,6 +86,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },

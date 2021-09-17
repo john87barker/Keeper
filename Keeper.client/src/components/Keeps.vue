@@ -1,13 +1,13 @@
 <template>
-  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep(keep.id)">
-    <img :src="keep.img" class="card-img  w-100 rounded shadow" alt="">
+  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep(keep.id)" class="a ">
+    <img :src="keep.img" class="card-img  w-100 rounded shadow a" alt="">
     <div class="card-img-overlay ">
       <div>
-        <h3 class="card-title d-flex justify-content-between align-text-bottom text-dark words">
+        <h3 class="card-title d-flex justify-content-between align-text-bottom  words">
           {{ keep.name }}
 
-          <div>
-            <img :src="keep.creator.picture" class="rounded-pill pic action" alt="" @click.stop="goToProfile">
+          <div class="travel">
+            <img :src="keep.creator.picture" class="rounded-pill pic " alt="" @click.stop="goToProfile">
           </div>
         </h3>
       </div>
@@ -59,14 +59,18 @@ export default {
 <style lang="scss" scoped>
 .pic{
   width: 3rem;
+  box-shadow: 5px 5px 15px black;
 }
 .words{
-  text-shadow:1px 1px 15px white;
+  color: white;
+  text-shadow:10px 10px 50px black;
 }
 // .container{
 //   display: grid;
 //   grid-template-columns: 2fr, 1fr, 1fr;
 //   gap: 10px;
 // }
-
+.travel:hover{
+  transform: 1.5;
+}
 </style>

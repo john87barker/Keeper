@@ -1,9 +1,9 @@
 <template>
-  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep(keep.id)">
-    <img :src="keep.img" class="card-img  w-100 rounded" alt="">
+  <div data-target="#active-keep-modal" data-toggle="modal" class="a" @click.prevent="setActiveKeep(keep.id)">
+    <img :src="keep.img" class="card-img  w-100 rounded " alt="">
     <div class="card-img-overlay ">
       <div>
-        <h3 class="card-title d-flex justify-content-between align-text-bottom text-dark words">
+        <h3 class="card-title d-flex justify-content-between align-text-bottom  words">
           {{ keep.name }}
         </h3>
       </div>
@@ -56,6 +56,7 @@ export default {
   width: 3rem;
 }
 .words{
-  text-shadow:1px 1px 15px white;
+  color: white;
+  text-shadow:10px 10px 50px black;
 }
 </style>

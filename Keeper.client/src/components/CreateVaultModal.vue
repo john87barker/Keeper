@@ -27,17 +27,18 @@
               >
               <br>
               <label for="Description"> Description </label>
-              <input
+              <textarea
                 title="Desc."
                 class="form-control"
                 type="text"
                 v-model="state.rawVault.description"
                 id="name"
-                placeholder="description..."
+                placeholder="Description..."
                 required
                 minlength="4"
                 maxlength="200"
               >
+              </textarea>
               <br>
               <label for="Image URL"> Image URL </label>
               <input

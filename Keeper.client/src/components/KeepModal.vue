@@ -4,44 +4,49 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="row flex-grow-1">
-            <div class="col-md-6">
+            <div class="col-md-5">
               <img :src="aKeep.img" class="pic" alt="">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
               <div class="row ">
                 <div class="col-md-12">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="col-md-12 text-center pb-3">
-                  Views:{{ aKeep.views }}
-                  Keeps: {{ aKeep.keeps }}
+                <div class="col-md-12 d-flex justify-content-around  pb-3">
+                  <h5>
+                    Views: <b class="text-primary">{{ aKeep.views }}</b>
+                  </h5>
+                  <h5>
+                    Keeps: <b class="text-primary">{{ aKeep.keeps }}</b>
+                  </h5>
                 </div>
 
                 <h2 class="col-md-12 text-center pb-4">
                   {{ aKeep.name }}
                 </h2>
-                <div class="col-md-12 pl-5">
+                <div class="col-md-12 text-center ">
                   {{ aKeep.description }}
                 </div>
                 <div class="col-md-12 text-center py-5">
                   ____________________________
                 </div>
               </div>
-              <div class=" row d-flex justify-content-center pt-5 ">
-                <!-- <p>{{ vaults }}</p> -->
-                <select v-model="state.selectedVault"
-                        :value="vaults.name"
-                        @change="assignVault(aKeep.id, user.id)"
-                >
-                  <!-- <option selected="selected" value="Add to Vault">
-                    Add to Vault
-                  </option> -->
-                  <option v-for="v in vaults" :value="v.id" :key="v.id" :vault="v">
-                    {{ v.name }}
-                  </option>
-                </select>
+              <div class=" row d-flex justify-content-center pt-5 mt-5">
+                <div class="col-md-4 text-right">
+                  <div>add to vault</div>
+                  <select v-model="state.selectedVault"
+                          class="custom-select-sm a mt-3"
+                          title="add to vault"
+                          :value="vaults.name"
+                          @change="assignVault(aKeep.id, user.id)"
+                  >
+                    <option v-for="v in vaults" :value="v.id" :key="v.id" :vault="v">
+                      {{ v.name }}
+                    </option>
+                  </select>
+                </div>
                 <!-- NOTE if time to make the selector pretty i want to use the bootstrap button below -->
                 <!-- <div class="dropdown col-md-3 mr-3 pt-3">
                   <button class="btn btn-primary btn-sm dropdown-toggle"
@@ -58,14 +63,19 @@
                     <Dropdown :vault="v" />
               </div>
             </div> -->
-                <div class="col-md-3 pt-3" v-if="aKeep.creatorId == user.id">
-                  <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)">
+
+                <div class="col-md-4 pt-3 text-center" v-if="aKeep.creatorId == user.id">
+                  <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)" title="delete keep" class="a">
                 </div>
-                <router-link :to="{ name: 'Profile', params: { id: aKeep.creatorId } }">
-                  <div class="col-md-3" @click="closeModal" v-if="aKeep.creator">
-                    <img :src="aKeep.creator.picture" class="rounded img pr-2">
-                  </div>
-                </router-link>
+
+                <div class="col-md-4  text-left d-flex " @click.stop="closeModal" v-if="aKeep.creator">
+                  <router-link :to="{ name: 'Profile', params: { id: aKeep.creatorId } }">
+                    <img :src="aKeep.creator.picture" class="a rounded img pr-2 pt-2" title="visit profile">
+                  </router-link>
+                  <h5 class="text-dark clip-text">
+                    {{ aKeep.creator.name }}
+                  </h5>
+                </div>
               </div>
             </div>
           </div>
@@ -109,6 +119,7 @@ export default {
       keeps: computed(() => AppState.keeps),
       user: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
+      profile: computed(() => AppState.profiles),
       async deleteKeep(keepid) {
         try {
           // debugger
@@ -146,7 +157,7 @@ export default {
   object-fit:cover;
 }
 .img{
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
 }
 </style>

@@ -22,5 +22,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
+.a{
+  cursor: pointer;
+}
 </style>
