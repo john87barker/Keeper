@@ -34,7 +34,7 @@
                 </div>
               </div>
               <div class=" row d-flex justify-content-center pt-5 mt-5">
-                <div class="col-md-4 text-right">
+                <div class="col-md-5 col-sm-12 text-center ">
                   <div>add to vault</div>
                   <select v-model="state.selectedVault"
                           class="custom-select-sm a mt-3"
@@ -42,11 +42,15 @@
                           :value="vaults.name"
                           @change="assignVault(aKeep.id, user.id)"
                   >
+                    <option selected>
+                      Add to Vault
+                    </option>
                     <option v-for="v in vaults" :value="v.id" :key="v.id" :vault="v">
                       {{ v.name }}
                     </option>
                   </select>
                 </div>
+
                 <!-- NOTE if time to make the selector pretty i want to use the bootstrap button below -->
                 <!-- <div class="dropdown col-md-3 mr-3 pt-3">
                   <button class="btn btn-primary btn-sm dropdown-toggle"
@@ -64,15 +68,15 @@
               </div>
             </div> -->
 
-                <div class="col-md-4 pt-3 text-center" v-if="aKeep.creatorId == user.id">
+                <div class="col-md-1 col-sm-12 pt-3 text-center py-1" v-if="aKeep.creatorId == user.id">
                   <img src="../assets/img/delete.png" alt="" @click="deleteKeep(aKeep.id)" title="delete keep" class="a">
                 </div>
 
-                <div class="col-md-4  text-left d-flex " @click.stop="closeModal" v-if="aKeep.creator">
+                <div class="col-md-5 col-sm-12 d-flex justify-content-center py-1" @click.stop="closeModal" v-if="aKeep.creator">
                   <router-link :to="{ name: 'Profile', params: { id: aKeep.creatorId } }">
                     <img :src="aKeep.creator.picture" class="a rounded img pr-2 pt-2" title="visit profile">
                   </router-link>
-                  <h5 class="text-dark clip-text">
+                  <h5 class="text-dark clip-text d-inline pt-3">
                     {{ aKeep.creator.name }}
                   </h5>
                 </div>

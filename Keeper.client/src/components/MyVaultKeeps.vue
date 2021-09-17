@@ -1,6 +1,6 @@
 <template>
   <div data-target="#active-keep-modal" data-toggle="modal" class="a" @click.prevent="setActiveKeep(vk.id)">
-    <img :src="vk.img" class="card-img  w-100 rounded " alt="">
+    <img :src="vk.img" class="card-img  w-100 rounded" alt="">
     <div class="card-img-overlay">
       <div class="d-flex justify-content-between">
         <h3 class="card-title d-flex justify-content-between align-text-bottom words">

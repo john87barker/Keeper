@@ -17,7 +17,7 @@
       </div>
       <div class="card-columns">
         <!-- {{ vk }} -->
-        <div class="card" v-for="v in vk" :key="v.id">
+        <div class="card p-2" v-for="v in vk" :key="v.id">
           <MyVaultKeeps :vk="v" />
         </div>
       </div>
