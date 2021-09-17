@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep(vk.id)">
     <img :src="vk.img" class="card-img  w-100 rounded " alt="">
     <div class="card-img-overlay">
       <div class="d-flex justify-content-between">
@@ -31,7 +31,7 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     return {
       vault: computed(() => AppState.activeVault),
       keeps: computed(() => AppState.keeps),
@@ -62,6 +62,10 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
+      },
+      async setActiveKeep(id) {
+        AppState.activeKeep = props.vk
+        await keepsService.getKeepById(id)
       }
 
     }

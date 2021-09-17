@@ -15,7 +15,8 @@
                   </button>
                 </div>
                 <div class="col-md-12 text-center pb-3">
-                  Views and Keeps info
+                  Views:{{ aKeep.views }}
+                  Keeps: {{ aKeep.keeps }}
                 </div>
 
                 <h2 class="col-md-12 text-center pb-4">

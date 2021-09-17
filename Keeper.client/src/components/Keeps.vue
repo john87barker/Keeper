@@ -1,5 +1,5 @@
 <template>
-  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep">
+  <div data-target="#active-keep-modal" data-toggle="modal" @click.prevent="setActiveKeep(keep.id)">
     <img :src="keep.img" class="card-img  w-100 rounded shadow" alt="">
     <div class="card-img-overlay ">
       <div>
@@ -20,6 +20,7 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { router } from '../router'
+import { keepsService } from '../services/KeepsService'
 export default {
   props: {
     keep: {
@@ -45,8 +46,9 @@ export default {
         // console.log(props.keep.creatorId)
         router.push({ name: 'Profile', params: { id: props.keep.creatorId } })
       },
-      async setActiveKeep() {
+      async setActiveKeep(id) {
         AppState.activeKeep = props.keep
+        await keepsService.getKeepById(id)
       }
     }
   },
